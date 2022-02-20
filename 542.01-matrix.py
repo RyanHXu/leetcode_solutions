@@ -14,38 +14,32 @@ from pprint import pprint
 class Solution:
 
     def updateMatrix(self, mat: list[list[int]]) -> list[list[int]]:
-        
-        
+        dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         visited = set()
+        R, C = len(mat), len(mat[0])
         q = deque()
-        dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-        
-        R,C=len(mat), len(mat[0])
+
         for r in range(R):
             for c in range(C):
-                if mat[r][c] ==0:
-                    visited.add((r,c))
-                    q.append((r,c))
-                    
+                if mat[r][c] == 0:
+                    visited.add((r, c))
+                    q.append((r, c))
+
         while q:
-            x,y=q.popleft()
+            x, y = q.popleft()
             for dir in dirs:
                 newX, newY = x+dir[0], y+dir[1]
-                if 0<= newX < R and 0<=newY<C \
-                    and (newX,newY) not in visited:
-                        mat[newX][newY] = mat[x][y]+1
-                        visited.add((newX,newY))
-                        q.append((newX,newY))
-                        
-                        
+                if 0 <= newX < R and 0 <= newY < C and \
+                        (newX, newY) not in visited:
+                    mat[newX][newY] = mat[x][y]+1
+                    visited.add((newX, newY))
+                    q.append((newX, newY))
+
         return mat
 
 
 # @lc code=end
 
-
-s = Solution()
-pprint(s.updateMatrix([[0, 0, 0], [0, 1, 0], [1, 1, 1]]))
 
 
 # NOTE: approach 2 - slow
@@ -82,4 +76,3 @@ pprint(s.updateMatrix([[0, 0, 0], [0, 1, 0], [1, 1, 1]]))
 #                 if mat[i][j] == 1:
 #                     mat[i][j] = bfs(i, j)
 #         return mat
-
