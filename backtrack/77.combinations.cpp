@@ -37,3 +37,8 @@ public:
   }
 };
 // @lc code=end
+
+
+int main(){
+  cout << "hello world" << endl;
+}

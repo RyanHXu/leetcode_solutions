@@ -4,14 +4,7 @@
  * [46] Permutations
  */
 
-#include "algorithm"
-#include "iostream"
-#include "map"
-#include "numeric"
-#include "queue"
-#include "set"
-#include "vector"
-
+#include "bits/stdc++.h"
 using namespace std;
 
 // @lc code=start

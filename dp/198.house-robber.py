@@ -12,15 +12,13 @@ from functools import cache
 
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        
+
         @cache
-        def dp(i: int)->int :
-            if i<0: return 0
-            return max(dp(i-2)+nums[i], dp(i-1))
-    
+        def dp(i: int) -> int:
+            if i < 0:
+                return 0
+            return max(dp(i-2)+nums[i],dp(i-1))
+        
         return dp(len(nums)-1)
             
-        
-        
 # @lc code=end
-

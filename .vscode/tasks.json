@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "MinGW 11.2.0",
+      "command": "C:/Applications/AAA_libs/mingw64/bin/g++.exe",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}\\${fileBasenameNoExtension}.exe"
+      ],
+      "options": {
+        "cwd": "C:/Applications/AAA_libs/mingw64/bin"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": "build",
+      "detail": "compiler: C:/Applications/AAA_libs/mingw64/bin/g++.exe"
+    }
+  ]
+}
