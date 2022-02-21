@@ -34,14 +34,14 @@ class Solution:
                 visited.add((x, y))
                 for dir in dirs:
                     newX, newY = x+dir[0], y+dir[1]
-                    if 0 <= newX < R and 0 <= newY < C \
-                           and (newX, newY) not in visited:
+                    if 0 <= newX < R and 0 <= newY < C\
+                       and (newX, newY) not in visited:
                         if grid[newX][newY] == 0:
-                            q.append((newX,newY))
+                            q.append((newX, newY))
                             grid[newX][newY] = 1
-                            
+
             steps += 1
-            
+
         return steps
 
 

@@ -14,27 +14,27 @@ from pprint import pprint
 class Solution:
 
     def updateMatrix(self, mat: list[list[int]]) -> list[list[int]]:
-        dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-        visited = set()
-        R, C = len(mat), len(mat[0])
+        
+        dirs = [(-1,0),(1,0),(0,-1),(0,1)]
         q = deque()
-
+        R,C=len(mat),len(mat[0])
+        visited=set()
         for r in range(R):
             for c in range(C):
                 if mat[r][c] == 0:
-                    visited.add((r, c))
-                    q.append((r, c))
-
+                    q.append((r,c))
+                    visited.add((r,c))
+                    
         while q:
-            x, y = q.popleft()
+            x,y = q.popleft()
             for dir in dirs:
                 newX, newY = x+dir[0], y+dir[1]
-                if 0 <= newX < R and 0 <= newY < C and \
-                        (newX, newY) not in visited:
-                    mat[newX][newY] = mat[x][y]+1
-                    visited.add((newX, newY))
-                    q.append((newX, newY))
-
+                if 0<=newX<R and 0<=newY<C\
+                    and (newX,newY) not in visited:
+                        mat[newX][newY] = mat[x][y]+1
+                        visited.add((newX,newY))
+                        q.append((newX,newY))
+                    
         return mat
 
 
