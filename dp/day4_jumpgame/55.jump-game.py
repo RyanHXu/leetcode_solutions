@@ -8,7 +8,7 @@
 from functools import cache
 from re import T
 
-
+# TODO: second review
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
         n = len(nums)

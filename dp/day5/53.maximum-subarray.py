@@ -10,6 +10,20 @@ from functools import cache
 
 class Solution:
     def maxSubArray(self, nums: list[int]) -> int:
+        n = len(nums)
+        res = [0]*n
+        res[0]=nums[0]
+        for i in range(1,n):
+            res[i] = max(res[i-1]+nums[i],nums[i])
+        
+        return max(res)
+
+# @lc code=end
+
+
+# top-down
+class Solution2:
+    def maxSubArray(self, nums: list[int]) -> int:
 
         @cache
         def dp(i: int) -> int:
@@ -19,4 +33,7 @@ class Solution:
 
         return max(dp(i) for i in range(len(nums)))
 
-# @lc code=end
+
+s = Solution()
+print(s.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
+print(s.maxSubArray([-1]))
