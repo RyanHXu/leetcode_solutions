@@ -6,7 +6,6 @@
 
 # @lc code=start
 from functools import cache
-import re
 
 
 class Solution:
