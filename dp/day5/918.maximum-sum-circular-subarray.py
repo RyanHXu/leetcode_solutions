@@ -8,6 +8,7 @@
 
 # @lc code=start
 from functools import cache
+from typing import List
 
 
 # TODO: second review
@@ -19,19 +20,21 @@ class Solution:
         => sum + maxSub(-arr)
         """
         n = len(nums)
-        
-        @cache
-        def dp(i: int, s: int)->int :
-            if i==0: return nums[i]*s
-            return nums[i]*s + max(0, dp(i-1,s))
-        
-        max_p = max(dp(i, 1) for i in range(n))
-        max_m = max(dp(i, -1) for i in range(n))
-        
-        return max_p if max_p <0 else max(max_p, sum(nums)+max_m)
-        
-        
-        
-        
-# @lc code=end
 
+        @cache
+        def dp(i: int, sign: int) -> int:
+            if i == 0:
+                return nums[i]*sign
+            return nums[i]*sign + max(0, dp(i-1, sign))
+
+        max_p = max(dp(i, 1) for i in range(n))
+        max_n = max(dp(i, -1) for i in range(n))
+        print(max_p)
+        print(max_n)
+        print(max(max_p, sum(nums)+max_n))
+        print(sum(nums)+max_n)
+
+        return max_p if max_p < 0 else max(max_p, sum(nums)+max_n)
+
+
+# @lc code=end
