@@ -1,4 +1,4 @@
-[4,7,9,10]
-3
-[1,2,4]
-3
+["the","day","is","sunny","the","the","the","sunny","is","is"]
+4
+["i","love","leetcode","i","love","coding"]
+2
