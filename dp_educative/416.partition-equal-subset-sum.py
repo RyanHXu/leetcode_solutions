@@ -9,7 +9,39 @@ from functools import cache
 from typing import List
 
 
+# button up
+# FIXME
 class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        n = len(nums)
+        s= sum(nums)//2
+        
+        if n ==0 or s != 0:
+            return False
+        
+        grid = [[False for i in range(s+1)] for j in range(n)]
+        
+        for j in range(s//2+1):
+            grid[0][j] = nums[0] == j
+
+        for i in range(1,n):
+            for j in range(1,s+1):
+                if grid[i-1][j]:
+                    grid[i][j] =grid[i-1][j]
+                elif j>=nums[i]:
+                    grid[i][j] = grid[i-1][j-nums[i]]
+                    
+        return grid[n-1][s]
+                                        
+
+# @lc code=end
+
+s = Solution()
+s.canPartition([1, 5, 11, 5])
+
+
+# top down
+class Solution2:
     def canPartition(self, nums: List[int]) -> bool:
 
         S = sum(nums)
@@ -41,22 +73,16 @@ class Solution:
             return grid[index][sum]
 
         return True if dp(nums, S//2, 0) == 1 else False
+    
 
-
-# @lc code=end
-
-s = Solution()
-s.canPartition([1, 5, 11, 5])
-
-
-class Solution2:
+# cache
+class Solution3:
     def canPartition(self, nums: List[int]) -> bool:
 
         S = sum(nums)
         n = len(nums)
         if S % 2 != 0 or n == 0:
             return False
-        table = [[-1 for i in range(S//2+1)] for j in range(len(nums))]
 
         @cache
         def dp(nums, sum, index):
