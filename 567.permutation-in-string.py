@@ -7,7 +7,6 @@
 # 1) try all permulation of s1
 # 2) sliding window
 # @lc code=start
-from math import fabs
 
 
 class Solution:
