@@ -32,6 +32,7 @@ public:
       }
     }
 
+    sort(str.begin(), str.end());
     backtrack(str, 0);
     string t;
     for (int i = 0; i < res.size(); ++i) {
@@ -48,12 +49,20 @@ public:
 
     return res;
   }
+  bool check(string &permulation,int start, int curr){
+    for (int i = start; i < curr; ++i) {
+      if(permulation[i] == permulation[curr]){
+        return false;
+      }
+    }
+    return true;
+  }
   void backtrack(string &permulation, int start) {
     if (start == permulation.size()) {
       res.push_back(permulation);
     }
     for (int i = start; i < permulation.size(); ++i) {
-      if (i != start || permulation[i] != permulation[start]) {
+      if (check(permulation,start,i)) {
         swap(permulation[i], permulation[start]);
         backtrack(permulation, start + 1);
         swap(permulation[i], permulation[start]);
@@ -85,7 +94,7 @@ public:
 
 int main() {
   Solution s;
-  for (const auto val : s.generatePalindromes("abba")) {
+  for (const auto val : s.generatePalindromes("aaaabbbb")) {
     cout << val << endl;
   }
 }
