@@ -27,12 +27,11 @@ public:
 
 
 // A Perfect Binary Tree of height h (where height is number of nodes on path from root to leaf) has 2h – 1 nodes.
-// Below is an idea to check whether a given Binary Tree is perfect or not.  
 
 // Find depth of any node (in below tree we find depth of leftmost node). Let this depth be d.
 // Now recursively traverse the tree and check for following two conditions. 
-// Every internal node should have both children non-empty
-// All leaves are at depth ‘d’
+//    Every internal node should have both children non-empty
+//    All leaves are at depth ‘d’
 class PerfectTree {
 public:
   bool isPerfectTree(TreeNode *root) {
@@ -65,3 +64,49 @@ public:
   }
 };
 
+class TreeTraversal{
+
+public:
+  void preOrder(TreeNode* root){
+    if(root==nullptr){
+      return;
+    }
+    cout << root->val << ' ';
+    preOrder(root->left);
+    preOrder(root->right);
+  }
+
+    void inOrder(TreeNode* root){
+    if(root==nullptr){
+      return;
+    }
+    preOrder(root->left);
+    cout << root->val << ' ';
+    preOrder(root->right);
+  }
+    void postOrder(TreeNode* root){
+    if(root==nullptr){
+      return;
+    }
+    preOrder(root->left);
+    preOrder(root->right);
+    cout << root->val << ' ';
+  }
+};
+
+
+// add node based on level order
+TreeNode* initTree(vector<int> ivec){
+  if(ivec.empty()){
+    return nullptr;
+  }
+
+  
+
+  
+
+}
+
+int main(){
+  TreeNode *root = initTree({1,2,3,4});
+}
