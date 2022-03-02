@@ -17,7 +17,7 @@ class Solution:
           if right > left:
               backtrack(p + ')', left, right-1)
           if not right:
-              parens += p,
+              parens.append(p)
           return parens
       return backtrack('', n, n)
     
