@@ -18,7 +18,7 @@ public:
         sort(nums.begin(), nums.end());
         int diff = INT32_MAX;
 
-        for (int i = 0; i < n && diff!=0; ++i) {
+        for (int i = 0; i < n-2 && diff!=0; ++i) {
             int l = i + 1;
             int r = n - 1;
             while (l<r)
