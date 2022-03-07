@@ -5,6 +5,10 @@
 #
 
 # @lc code=start
+from pprint import pprint
+from typing import List
+
+
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         R, C = len(grid), len(grid[0])
@@ -27,3 +31,9 @@ class Solution:
 
         return count
 # @lc code=end
+
+
+l = [[1,0,0,1],[0,1,1,0],[0,1,1,1],[1,0,1,1]]
+
+for sub in l:
+    print(sub)
