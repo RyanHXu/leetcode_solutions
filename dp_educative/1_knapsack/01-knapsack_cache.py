@@ -1,5 +1,6 @@
 
 
+from doctest import REPORT_UDIFF
 from functools import cache
 
 
@@ -18,6 +19,9 @@ def solve_knapsack(profits, weights, capacity):
 
         return max(profit1, profit2)
     return knapsack(profits, weights, capacity, 0)
+
+
+
 
 
 print(solve_knapsack(tuple([1, 6, 10, 16]), tuple([1, 2, 3, 5]), 7))
