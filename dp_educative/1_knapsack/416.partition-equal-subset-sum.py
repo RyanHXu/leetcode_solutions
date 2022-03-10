@@ -7,7 +7,6 @@ from functools import cache
 from locale import currency
 from typing import List
 
-from numpy import cumprod
 
 # @lc code=start
 class Solution:
