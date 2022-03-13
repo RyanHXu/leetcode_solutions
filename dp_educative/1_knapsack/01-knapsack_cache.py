@@ -1,23 +1,25 @@
 
 
+from doctest import REPORT_UDIFF
 from functools import cache
 
 
-def solve_knapsack(profits, weights, capacity):
 
+def solve_knapsack(profits, weights, capacity):
     @cache
     def knapsack(profits, weights, capacity, index=0):
-        if capacity <= 0 or index > len(profits)-1:
+        if index > len(profits)-1 or capacity <= 0:
             return 0
-        profit1 = profit2 = 0
+
+        p1 = p2 = 0
         if weights[index] <= capacity:
-            profit1 = profits[index] + \
+            p1 = profits[index] + \
                 knapsack(profits, weights, capacity-weights[index], index+1)
+        p2 = knapsack(profits, weights, capacity, index+1)
 
-        profit2 = knapsack(profits, weights, capacity, index+1)
+        return max(p1, p2)
 
-        return max(profit1, profit2)
-    return knapsack(profits, weights, capacity, 0)
+    return knapsack(profits, weights, capacity)
 
 
 print(solve_knapsack(tuple([1, 6, 10, 16]), tuple([1, 2, 3, 5]), 7))
