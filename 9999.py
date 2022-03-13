@@ -17,7 +17,7 @@ print(grid.replace('[','{').replace(']','}').replace('"',"'").replace('\n','')+'
 
 #%% 
 str= """
-Minimum Deletions & Insertions to Transform a String into another
+Count Artifacts That Can Be Extracted
 
 
 """
