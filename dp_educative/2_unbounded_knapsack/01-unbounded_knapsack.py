@@ -1,32 +1,31 @@
 from functools import cache
 
 
-
-
 def solve_knapsack(profits, weights, capacity):
     n = len(profits)
-    if  n==0: return 0 
+    if n == 0:
+        return 0
+
+    @cache
     def solve_knapsack_recursive(profits, weights, capacity, currIndex=0):
-        if capacity<=0 or currIndex>n-1:
+        if capacity <= 0 or currIndex > n-1:
             return 0
-        p1= p2=0
+        p1 = p2 = 0
         # recursive call after choosing the items at the currentIndex, note that we recursive call on all
         # items as we did not increment currentIndex
-        if weights[currIndex]<=capacity:
-            p1 = profits[currIndex]+solve_knapsack_recursive(profits,weights,capacity-weights[currIndex],currIndex+1)
-            
+        if weights[currIndex] <= capacity:
+            p1 = profits[currIndex]+solve_knapsack_recursive(
+                profits, weights, capacity-weights[currIndex], currIndex)
+
         # recursive call after excluding the element at the currentIndex
-        p2 = solve_knapsack_recursive(profits,weights,capacity,currIndex+1)
-        
-        return max(p1,p2)
-    
-    return solve_knapsack_recursive(tuple(profits),tuple(weights),capacity)
-            
-        
-        
-    
+        p2 = solve_knapsack_recursive(profits, weights, capacity, currIndex+1)
+
+        return max(p1, p2)
+
+    return solve_knapsack_recursive(tuple(profits), tuple(weights), capacity)
 
 
+print(solve_knapsack([15,20,50], [1,2,3], 5))
 print(solve_knapsack([15, 50, 60, 90], [1, 3, 4, 5], 8))
 print(solve_knapsack([15, 50, 60, 90], [1, 3, 4, 5], 6))
 
@@ -39,4 +38,3 @@ print(solve_knapsack([15, 50, 60, 90], [1, 3, 4, 5], 6))
 
 # capacity = 20000
 # print(solve_knapsack(profits, weights, capacity))
-

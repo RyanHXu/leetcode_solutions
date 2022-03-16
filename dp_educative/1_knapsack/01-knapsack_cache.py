@@ -1,29 +1,28 @@
 
 
-from doctest import REPORT_UDIFF
 from functools import cache
-
-
 
 def solve_knapsack(profits, weights, capacity):
     @cache
     def knapsack(profits, weights, capacity, index=0):
-        if index > len(profits)-1 or capacity <= 0:
+        if index> len(profits)-1 or capacity<=0:
             return 0
-
-        p1 = p2 = 0
-        if weights[index] <= capacity:
+        p1 = p2 =0
+        
+        if capacity>= weights[index]:
             p1 = profits[index] + \
-                knapsack(profits, weights, capacity-weights[index], index+1)
-        p2 = knapsack(profits, weights, capacity, index+1)
-
-        return max(p1, p2)
-
-    return knapsack(profits, weights, capacity)
-
+            knapsack(profits,weights,capacity-weights[index],index+1)
+            
+        p2 =knapsack(profits,weights,capacity,index+1)
+        
+        return max(p1,p2)
+    
+    return knapsack(profits,weights,capacity)
+   
 
 print(solve_knapsack(tuple([1, 6, 10, 16]), tuple([1, 2, 3, 5]), 7))
 print(solve_knapsack(tuple([1, 6, 10, 16]), tuple([1, 2, 3, 5]), 6))
+
 
 # test cache performance
 profits = (804, 982, 475, 766, 715, 101, 552, 835, 476, 821, 707, 459, 2, 800, 500, 526, 33, 988, 922, 688, 249, 561, 544, 131, 484, 431, 91, 936, 676, 527, 985, 491, 314, 989, 238, 12, 174, 757, 18, 649, 268, 455, 22, 796, 30, 431, 465, 581, 479, 949, 785,

@@ -55,6 +55,7 @@ class Solution_1:
 
 
 
+# top down
 class Solution2:
     def canPartition(self, nums: List[int]) -> bool:
         S = sum(nums)
@@ -85,6 +86,7 @@ class Solution2:
         return True if dp(nums, S//2, 0) == 1 else False
 
 
+# button up
 class Solution3:
     def canPartition(self, nums: List[int]) -> bool:
         n = len(nums)

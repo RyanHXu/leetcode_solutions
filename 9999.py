@@ -17,8 +17,7 @@ print(grid.replace('[','{').replace(']','}').replace('"',"'").replace('\n','')+'
 
 #%% 
 str= """
-Count Artifacts That Can Be Extracted
-
+Staircase
 
 """
 print(str.lower().replace(' ','_'))
