@@ -10,6 +10,17 @@ using namespace std;
 class Solution {
 public:
   string longestPalindrome(string s) {
+    
+  }
+  
+};
+// @lc code=end
+
+
+
+class Solution {
+public:
+  string longestPalindrome(string s) {
     const int n = s.length();
     auto getlen = [&](int l, int r) {
       while (l >= 0 && r < n && s[l] == s[r]) {
@@ -32,4 +43,3 @@ public:
     return s.substr(start, len);
   }
 };
-// @lc code=end
