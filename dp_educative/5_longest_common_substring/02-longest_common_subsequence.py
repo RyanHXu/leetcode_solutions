@@ -18,5 +18,6 @@ def find_LCS_length(s1, s2):
 print(find_LCS_length("abdca", "cbda"))
 print(find_LCS_length("passport", "ppsspt"))
 print(find_LCS_length("abcdeab", "abcdkab"))
+print(find_LCS_length("glllgl", "llllg"))
 
 

@@ -14,7 +14,10 @@ def find_LCS_length(s1, s2):
         return max(count,max(c1,c2))
     return find_LCS_length_recursive(s1,s2,0,0)
 
+
 print(find_LCS_length("abdca", "cbda"))
 print(find_LCS_length("passport", "ppsspt"))
+print(find_LCS_length("abcdeab", "abcdkab"))
+print(find_LCS_length("glllgl", "llllg"))
 
 

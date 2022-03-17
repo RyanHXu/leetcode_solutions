@@ -2,20 +2,56 @@
 
 using namespace std;
 
-// TODO:
+// TODO:  button up optimized
+class LCS {
+public:
+  int findLCSLength(const string &s1, const string &s2) {
+    vector<vector<int>> dp(2, vector<int>(s2.size() + 1, 0));
+    int maxLen = 0;
+    for (int i = 1; i < s1.size() + 1; ++i) {
+      for (int j = 1; j < s2.size() + 1; ++j) {
+        // reset data
+        dp[i % 2][j] = 0;
+        if (s1[i - 1] == s2[j - 1]) {
+          dp[i % 2][j] = 1 + dp[(i - 1) % 2][j - 1];
+          maxLen = max(maxLen, dp[i % 2][j]);
+        }
+      }
+    }
+    return maxLen;
+  }
+};
+
+class LCSButtonUp {
+public:
+  int findLCSLength(const string &s1, const string &s2) {
+    vector<vector<int>> dp(s1.size() + 1, vector<int>(s2.size() + 1, 0));
+    int maxLen = 0;
+    for (int i = 1; i < s1.size() + 1; ++i) {
+      for (int j = 1; j < s2.size() + 1; ++j) {
+        if (s1[i - 1] == s2[j - 1]) {
+          dp[i][j] = 1 + dp[i - 1][j - 1];
+          maxLen = max(maxLen, dp[i][j]);
+        }
+      }
+    }
+    return maxLen;
+  }
+};
+
+// TODO: three-dimensional array or hash table
 // The three changing values to our recursive function are the two indexes (i1
 // and i2) and the ‘count’. Therefore, we can store the results of all
 // subproblems in a three-dimensional array. (Another alternative could be to
 // use a hash-table whose key would be a string (i1 + “|” i2 + “|” + count)).
 
 // hash
-class LCS {
-  unordered_map<string,int> m;
+class LCSMap {
+  unordered_map<string, int> m;
 
 public:
   int findLCSLength(const string &s1, const string &s2) {
-    int maxLen = min(s1.size(), s2.size());
-
+    m = {};
     return findLCSLengthRecursion(s1, s2);
   }
 
@@ -25,7 +61,7 @@ public:
       return count;
     }
     string key = to_string(i) + "|" + to_string(j) + "|" + to_string(count);
-    if (m.find(key)==m.end()) {
+    if (m.find(key) == m.end()) {
       int c1 = count, c2 = 0, c3 = 0;
       if (s1[i] == s2[j]) {
         c1 = findLCSLengthRecursion(s1, s2, count + 1, i + 1, j + 1);
@@ -89,10 +125,16 @@ public:
 };
 
 int main(int argc, char *argv[]) {
-  LCS *lcs = new LCS();
-//   cout << lcs->findLCSLength("abdca", "cbda") << endl;
+  // LCS *lcs = new LCS();
+  // LCSButtonUp *lcs = new LCSButtonUp();
+  // LCSMap *lcs = new LCSMap();
+  // LCS3DVec *lcs = new LCS3DVec();
+  LCSRecursion *lcs = new LCSRecursion();
+  // 2, 3, 4, 4
+  cout << lcs->findLCSLength("abdca", "cbda") << endl;
   cout << lcs->findLCSLength("passport", "ppsspt") << endl;
-//   cout << lcs->findLCSLength("glll", "lll") << endl;
+  cout << lcs->findLCSLength("abcdeab", "abcdkab") << endl;
+  cout << lcs->findLCSLength("glllgl", "llllg") << endl;
 
   delete lcs;
 }
