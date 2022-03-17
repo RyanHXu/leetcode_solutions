@@ -32,8 +32,8 @@ private:
       int c1 = 0, c2 = 0, c3 = 0;
       if (st[l] == st[r]) {
         int remainingLength = r - l - 1;
-        // TODO: it's nothing that the following condition make sure the reamining
-        // part is longest palindromic substring
+        // TODO: it's nothing that the following condition make sure the
+        // reamining part is longest palindromic substring
         if (remainingLength == findLPSLengthRecursion(st, l + 1, r - 1)) {
           c1 = 2 + remainingLength;
         }
@@ -46,7 +46,6 @@ private:
     return dp[l][r];
   }
 };
-
 
 // button up
 class LPSButtonUp {
@@ -75,7 +74,41 @@ public:
   }
 };
 
+// TODO: followup, could you return LPS substring,instead of return its length,
+class LPSButtonUpF1 {
+public:
+  string findLPSLength(const string &st) {
+    int n = st.size();
+    vector<vector<bool>> dp(n, (vector<bool>(n, false)));
+
+    for (int i = 0; i < n; ++i) {
+      dp[i][i] = true;
+    }
+
+    int maxLen = 1;
+    int start = 0;
+    for (int l = n - 1; l > -1; --l) {
+      for (int r = l + 1; r < n; ++r) {
+        // If the element at the startIndex matches the element at the endIndex,
+        // we will further check if the remaining substring (from startIndex+1
+        // to endIndex-1) is a substring too.
+        if (st[l] == st[r]) {
+          if (r - l == 1 || dp[l + 1][r - 1]) {
+            dp[l][r] = true;
+            if (maxLen < r - l + 1) {
+              start = l;
+              maxLen = r - l + 1;
+            }
+          }
+        }
+      }
+    }
+    return st.substr(start, maxLen);
+  }
+};
+
 int main(int argc, char *argv[]) {
+  cout << "top down with memo" << endl;
   LPS *lps = new LPS();
   cout << lps->findLPSLength("abdbca") << endl;
   cout << lps->findLPSLength("cddpd") << endl;
@@ -83,10 +116,22 @@ int main(int argc, char *argv[]) {
 
   delete lps;
 
+  cout << "buttton up" << endl;
   LPSButtonUp *lps2 = new LPSButtonUp();
   cout << lps2->findLPSLength("abdbca") << endl;
   cout << lps2->findLPSLength("cddpd") << endl;
   cout << lps2->findLPSLength("pqr") << endl;
 
   delete lps2;
+
+  cout << "buttton up - return substring" << endl;
+  LPSButtonUpF1 *lps3 = new LPSButtonUpF1();
+  // a
+  // ca
+  // a
+  cout << lps3->findLPSLength("abdbca") << endl;
+  cout << lps3->findLPSLength("cddpd") << endl;
+  cout << lps3->findLPSLength("pqr") << endl;
+
+  delete lps3;
 }
