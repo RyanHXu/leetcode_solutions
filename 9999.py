@@ -17,8 +17,7 @@ print(grid.replace('[','{').replace(']','}').replace('"',"'").replace('\n','')+'
 
 #%% 
 str= """
-Staircase
-
+Minimum White Tiles After Covering With Carpets
 """
 print(str.lower().replace(' ','_'))
 

@@ -31,9 +31,11 @@ public:
     int minPrice = INT32_MAX, maxProfit = 0;
     int n = prices.size();
     for (int i = 0; i < n; ++i) {
+        // update lowest price
       if (prices[i] < minPrice) {
         minPrice=prices[i];
       } else if (prices[i] - minPrice > maxProfit) {
+        // update max profit
         maxProfit = prices[i] - minPrice;
       }
     }
