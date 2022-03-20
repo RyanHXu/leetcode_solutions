@@ -26,9 +26,10 @@ public:
     int maxProfit(vector<int>& prices) {
         int rest=0, sold=0,hold=INT32_MIN;
         for (const auto& price : prices) {
-            hold = max(hold, rest - price);
+            int prev_sold = sold;
             sold = hold + price;
-            rest = max(hold, rest - price);
+            hold = max(hold, rest - price);
+            rest = max(rest, prev_sold);
         }
         return max(rest, sold);
     }
