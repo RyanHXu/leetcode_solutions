@@ -9,6 +9,7 @@
 using namespace std;
 
 // @lc code=start
+
 class Solution {
 public:
   int maxProfit(vector<int> &prices) {
@@ -17,13 +18,10 @@ public:
       balance = max(balance, -val);
       profit = max(profit, val + balance);
     }
-
     return profit;
   }
 };
-
 // @lc code=end
-
 
 class Solution2 {
 public:
@@ -31,9 +29,9 @@ public:
     int minPrice = INT32_MAX, maxProfit = 0;
     int n = prices.size();
     for (int i = 0; i < n; ++i) {
-        // update lowest price
+      // update lowest price
       if (prices[i] < minPrice) {
-        minPrice=prices[i];
+        minPrice = prices[i];
       } else if (prices[i] - minPrice > maxProfit) {
         // update max profit
         maxProfit = prices[i] - minPrice;
@@ -42,6 +40,7 @@ public:
     return maxProfit;
   }
 };
+
 int main() {
   Solution s;
   vector<int> ivec{7, 1, 5, 3, 6, 4};
