@@ -27,7 +27,6 @@ class Solution:
                 res += min(dp(i+1, 0), dp(i+1, 2))
             elif color == 2:
                 res += min(dp(i+1, 0), dp(i+1,1))
-
             return res
         
         return min([dp(0, i) for i in range(3)])
