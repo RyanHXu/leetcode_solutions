@@ -1,5 +1,5 @@
 #include "bits/stdc++.h"
-#include "gtest/gtest.h"
+// #include "gtest/gtest.h"
 
 using namespace std;
 
@@ -19,6 +19,10 @@ public:
   }
 
   int findLISLengthRecursive(const vector<int> &nums, int curr, int prev) {
+    string key = getKey(curr, prev);
+    if(m.count(key))
+      return m[key];
+
     // base check
     if (curr == nums.size()) {
       return 0;
@@ -33,7 +37,13 @@ public:
 
     // excluding the number at currentIndex
     c2 = findLISLengthRecursive(nums, curr + 1, prev);
-    return max(c1, c2);
+    m[key] = max(c1, c2);
+    return m[key];
+    
+  }
+
+  string getKey(int curr, int prev){
+    return to_string(curr) + "|" + to_string(prev);
   }
 };
 
@@ -64,16 +74,25 @@ public:
   }
 };
 
-namespace gtest {
-TEST(SolutionTest, CheckSolutionCorrectness) {
-  LIS *lis = new LIS();
-  EXPECT_EQ(5, lis->findLISLength({4, 2, 3, 6, 10, 1, 12}));
-  EXPECT_EQ(4, lis->findLISLength({-4, 10, 3, 7, 15}));
-}
-} // namespace gtest
+// namespace gtest {
+// TEST(SolutionTest, CheckSolutionCorrectness) {
+//   LIS *lis = new LIS();
+//   EXPECT_EQ(5, lis->findLISLength({4, 2, 3, 6, 10, 1, 12}));
+//   EXPECT_EQ(4, lis->findLISLength({-4, 10, 3, 7, 15}));
+// }
+// } // namespace gtest
+
+// int main(int argc, char *argv[]) {
+//   ::testing::InitGoogleTest();
+//   return RUN_ALL_TESTS();
+// }
 
 int main(int argc, char *argv[]) {
-  ::testing::InitGoogleTest();
-  return RUN_ALL_TESTS();
-}
+  LIS *lis = new LIS();
+  vector<int> nums = {4, 2, 3, 6, 10, 1, 12};
+  cout << lis->findLISLength(nums) << endl; // 5
+  nums = vector<int>{-4, 10, 3, 7, 15};
+  cout << lis->findLISLength(nums) << endl; // 4
 
+  delete lis;
+}
