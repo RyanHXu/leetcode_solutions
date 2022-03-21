@@ -2,7 +2,9 @@
 
 using namespace std;
 
-// TODO:  button up optimized
+// button up - space optimized
+// optimized by 2 row array
+// also need a variable to track longest common subsequence
 class LCS {
 public:
   int findLCSLength(const string &s1, const string &s2) {
@@ -45,12 +47,13 @@ public:
 // subproblems in a three-dimensional array. (Another alternative could be to
 // use a hash-table whose key would be a string (i1 + “|” i2 + “|” + count)).
 
-// hash
+// map
 class LCSMap {
   unordered_map<string, int> m;
 
 public:
   int findLCSLength(const string &s1, const string &s2) {
+    // reset map new task
     m = {};
     return findLCSLengthRecursion(s1, s2);
   }
@@ -116,25 +119,30 @@ public:
       return count;
     }
     if (s1[i] == s2[j]) {
+      // if s1[i]==s2[j], do ++count;
       count = findLCSLengthRecursion(s1, s2, count + 1, i + 1, j + 1);
     }
+    // it's noting, here is the different from longest common sebsequence
+    // if s1[i]!=s2[j], set count to 0,
     int c1 = findLCSLengthRecursion(s1, s2, 0, i + 1, j);
     int c2 = findLCSLengthRecursion(s1, s2, 0, i, j + 1);
+    // we also need to compare three variables here, count, c1, c2 
     return max(count, max(c1, c2));
   }
 };
 
 int main(int argc, char *argv[]) {
-  // LCS *lcs = new LCS();
+  LCS *lcs = new LCS();
   // LCSButtonUp *lcs = new LCSButtonUp();
   // LCSMap *lcs = new LCSMap();
   // LCS3DVec *lcs = new LCS3DVec();
-  LCSRecursion *lcs = new LCSRecursion();
+  // LCSRecursion *lcs = new LCSRecursion();
   // 2, 3, 4, 4
   cout << lcs->findLCSLength("abdca", "cbda") << endl;
   cout << lcs->findLCSLength("passport", "ppsspt") << endl;
+  // abcd, abcd
   cout << lcs->findLCSLength("abcdeab", "abcdkab") << endl;
-  cout << lcs->findLCSLength("glllgl", "llllg") << endl;
+  cout << lcs->findLCSLength("glllgl", "lllgabl") << endl;
 
   delete lcs;
 }

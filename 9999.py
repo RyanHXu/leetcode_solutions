@@ -18,7 +18,7 @@ print(grid.replace('[','{').replace(']','}').replace('"',"'").replace('\n','')+'
 
 #%% 
 str= """
-Minimum White Tiles After Covering With Carpets
+Minimum Deletions & Insertions to Transform a String into another
 """
 print(str.lower().replace(' ','_'))
 
