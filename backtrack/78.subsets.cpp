@@ -10,23 +10,23 @@ using namespace std;
 
 // @lc code=start
 // backtrack
-// NOTE: review
-class Solution {
+// TODO: review
+class Solution2 {
   vector<vector<int>> res{};
   vector<int> subset;
   int n, k;
 
-  public:
+public:
   vector<vector<int>> subsets(vector<int> &nums) {
     n = nums.size();
     for (k = 0; k < n + 1; ++k) {
-        backtrack(nums, subset, 0);
+      backtrack(nums, subset, 0);
     }
-
     return res;
   }
+
   void backtrack(vector<int> &nums, vector<int> &subset, int start) {
-    if (subset.size() == k) {
+    if (subset.size() ==k) {
       res.push_back(subset);
     }
 
@@ -37,13 +37,14 @@ class Solution {
     }
   }
 };
+
 // @lc code=end
 // BFS
 class Solution {
 public:
   vector<vector<int>> subsets(vector<int> &nums) {
     vector<vector<int>> res{{}};
-    for (const auto val : nums) {
+    for (const auto &val : nums) {
       int n = res.size();
       for (int i = 0; i < n; ++i) {
         auto temp = res[i];
@@ -54,3 +55,15 @@ public:
     return res;
   }
 };
+
+int main() {
+  Solution2 s;
+  vector<int> ivec{1, 2,3};
+  for (const auto &it : s.subsets(ivec)) {
+    for (const auto &val : it) {
+      cout << val << ' ';
+    }
+    cout << endl;
+  }
+  cout << endl;
+}
