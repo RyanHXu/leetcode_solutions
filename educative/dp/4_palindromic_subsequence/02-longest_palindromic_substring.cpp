@@ -8,6 +8,48 @@ using namespace std;
  * @return the length of LPS
  *
  */
+
+class LPSMap {
+  unordered_map<string, int> m;
+
+public:
+  int findLPSLength(const string &st) {
+    m = {};
+    int n = st.size();
+    return findLPSLengthRecursion(st, 0, n - 1);
+  }
+
+private:
+  string getKey(int l, int r) { return to_string(l) + "|" + to_string(r); }
+  int findLPSLengthRecursion(const string &st, int l, int r) {
+    if (l > r) {
+      return 0;
+    }
+    if (l == r) {
+      return 1;
+    }
+    string key = getKey(l, r);
+    if (!m.count(key)) {
+      // case 1: start == end
+      int c1 = 0, c2 = 0, c3 = 0;
+      if (st[l] == st[r]) {
+        // TODO: it's nothing that the following condition make sure the
+        // reamining part is longest palindromic substring
+        int remainingLength = r - l - 1;
+        if (remainingLength == findLPSLengthRecursion(st, l + 1, r - 1)) {
+          c1 = 2 + remainingLength;
+        }
+        // c1 = findLPSLengthRecursion(st, l + 1, r - 1);
+      }
+      c2 = findLPSLengthRecursion(st, l + 1, r);
+      c3 = findLPSLengthRecursion(st, l, r - 1);
+      m[key] = max(c1, max(c2, c3));
+    }
+
+    return m[key];
+  }
+};
+
 // topdown
 class LPS {
   vector<vector<int>> dp;
@@ -134,4 +176,11 @@ int main(int argc, char *argv[]) {
   cout << lps3->findLPSLength("pqr") << endl;
 
   delete lps3;
+
+  LPSMap *lpsM = new LPSMap();
+  cout << lpsM->findLPSLength("abdbca") << endl;
+  cout << lpsM->findLPSLength("cddpd") << endl;
+  cout << lpsM->findLPSLength("pqr") << endl;
+
+  delete lpsM;
 }

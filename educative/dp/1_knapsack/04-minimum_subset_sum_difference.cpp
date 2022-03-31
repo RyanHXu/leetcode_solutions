@@ -3,7 +3,7 @@
 using namespace std;
 
 class PartitionSet {
-public:
+ public:
   int canPartition(const vector<int> &num) {
     int n = num.size();
     int sum = accumulate(num.begin(), num.end(), 0);
@@ -13,7 +13,6 @@ public:
 
     for (int i = 0; i < n; ++i) {
       dp[i][0] = true;
-    }
 
     for (int c = 1; c < halfSum + 1; ++c) {
       if (c == num[0]) {
@@ -25,7 +24,7 @@ public:
       for (int j = 1; j < halfSum + 1; ++j) {
         if (dp[i - 1][j]) {
           dp[i][j] = dp[i - 1][j];
-        } else if (num[i] <= j) {
+        } else if (j >= num[i]) {
           dp[i][j] = dp[i - 1][j - num[i]];
         }
       }

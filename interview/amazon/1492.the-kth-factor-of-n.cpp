@@ -9,7 +9,7 @@
 using namespace std;
 
 // @lc code=start
-// Math way, logN
+// Math, logN
 class Solution {
 public:
   int kthFactor(int n, int k) {
