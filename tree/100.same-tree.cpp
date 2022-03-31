@@ -19,13 +19,40 @@ struct TreeNode {
 // @lc code=start
 
 class Solution {
-public:
-    bool isSameTree(TreeNode* p, TreeNode* q) {
-        if(!p || !q){
-            return p == q;
-        }
-        return p->val == q->val && (isSameTree(p->left, q->left)) && (isSameTree(p->right, q->right));
+ public:
+  bool isSameTree(TreeNode *p, TreeNode *q) {
+    // three possible
+    // 1) p ==nullptr && q == nullptr
+    // return true
+    if (p == nullptr && q == nullptr) {
+      return true;
     }
+
+    // 2) p == nullptr && q != nullptr
+    // 3) p != nullptr && q == nullptr
+    // return false
+    if ((p == nullptr && q != nullptr) || (p != nullptr && q == nullptr)) {
+      return false;
+    }
+
+    return p->val == q->val && isSameTree(p->left, q->left) &&
+           isSameTree(p->right, q->right);
+  }
 };
+
 // @lc code=end
 
+
+
+// simple code
+class Solution2 {
+ public:
+  bool isSameTree(TreeNode *p, TreeNode *q) {
+
+    if (p == nullptr || q == nullptr) {
+      return p == q;
+    }
+    return p->val == q->val && (isSameTree(p->left, q->left)) &&
+           (isSameTree(p->right, q->right));
+  }
+};
