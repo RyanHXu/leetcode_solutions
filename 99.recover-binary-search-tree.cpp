@@ -21,6 +21,13 @@ struct TreeNode {
 
 // @lc code=start
 
+// 1 2 3 4
+// 1 3 2 4
+
+
+// 1 4 2 3
+// 1 2 3 4
+
 // time complexity is O(N+N) => O(N)
 // space complexity is O(N)
 
@@ -30,18 +37,28 @@ class Solution {
  public:
   // identify two swapped elements a and b
   void recoverTree(TreeNode *root) {
+
+
+    inorder(root);
     TreeNode *firstError = nullptr;
     TreeNode *secondError = nullptr;
-    for (int i = 1; i < svec.size(); ++i) {
-      if (svec[i - 1]->val > svec[i]->val) {
-        secondError == svec[i];
+    bool firstErrorOccur = false;
 
-        if (firstError == nullptr) {
+    for (int i = 0; i < svec.size()-1; ++i) {
+      if (svec[i]->val > svec[i+1]->val) {
+        secondError = svec[i+1];
+
+        if (!firstErrorOccur) {
+            firstError = svec[i];
+            firstErrorOccur = true;
         } else {
           break;
         }
       }
     }
+    // int temp = firstError->val;
+    // firstError->val = secondError->val;
+    // secondError->val = temp;
 
     swap(firstError->val, secondError->val);
   }
