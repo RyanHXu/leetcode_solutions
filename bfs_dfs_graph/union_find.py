@@ -1,7 +1,5 @@
 # https://www.geeksforgeeks.org/union-find/
 
-# Python Program for union-find algorithm to detect cycle in a undirected graph
-# we have one egde for any two vertex i.e 1-2 is either 1-2 or 2-1 but not both
 
 from collections import defaultdict
 
@@ -18,16 +16,30 @@ class Graph:
 		self.graph[u].append(v)
 
 	# A utility function to find the subset of an element i
-	def find_parent(self, parent,i):
+	def find(self, parent,i):
 		if parent[i] == -1:
 			return i
-		if parent[i]!= -1:
-			return self.find_parent(parent,parent[i])
+		return self.find(parent,parent[i])
 
 	# A utility function to do union of two subsets
 	def union(self,parent,x,y):
 		parent[x] = y
 
+	def print_graph(self,parent):
+		s = set()
+		for key in self.graph:
+			s.add(key)
+			for value in self.graph[key]:
+				s.add(value)
+    
+  
+		for sub in s:
+			print(f"{sub:>4}" ,end=" ")
+		print()
+   
+		for sub in s:
+			print(f"{parent[sub]:>4}",end=' ')
+		print('\n')
 
 
 	# The main function to check whether a given graph
@@ -37,24 +49,35 @@ class Graph:
 		# Allocate memory for creating V subsets and
 		# Initialize all subsets as single element sets
 		parent = [-1]*(self.V)
+  
 
 		# Iterate through all edges of graph, find subset of both
 		# vertices of every edge, if both subsets are same, then
 		# there is cycle in graph.
-		for i in self.graph:
-			for j in self.graph[i]:
-				x = self.find_parent(parent, i)
-				y = self.find_parent(parent, j)
+		# self.graph is key
+  		# self.graph[key] is value - list
+		for u in self.graph:
+			for v in self.graph[u]: # traverse the value(list) of key(u)
+				x = self.find(parent, u)
+				y = self.find(parent, v)
+    
 				if x == y:
 					return True
 				self.union(parent,x,y)
-
+				self.print_graph(parent)
 
 # Create a graph given in the above diagram
-g = Graph(3)
+g = Graph(100)
+
 g.addEdge(0, 1)
-g.addEdge(1, 2)
-g.addEdge(2, 0)
+g.addEdge(2, 3)
+g.addEdge(3, 4)
+g.addEdge(10,11)
+g.addEdge(11,12)
+g.addEdge(0,10)
+print(g.graph)
+
+
 
 if g.isCyclic():
 	print ("Graph contains cycle")
