@@ -10,10 +10,10 @@ using namespace std;
 // toddown map
 // recursion
 
-
 // two variables, index of profits, capacity
 
 // 1d array
+// final version
 class Knapsack {
  public:
   int solveKnapsack(const vector<int> &profits, const vector<int> &weights,
@@ -34,7 +34,6 @@ class Knapsack {
     return dp[capacity];
   }
 };
-
 
 class KnapsackButtonUpOpt {
  public:
@@ -63,7 +62,6 @@ class KnapsackButtonUpOpt {
     return max(dp[0][capacity], dp[1][capacity]);
   }
 };
-
 
 class KnapsackButtonUp {
  public:
@@ -129,7 +127,7 @@ class KnapsackMap {
   }
 };
 
-class KnapsackVec {
+class KnapsackVecMemory {
   vector<vector<int>> dp;
 
  public:
@@ -158,10 +156,19 @@ class KnapsackVec {
       dp[index][capacity] = max(p1, p2);
     }
 
+    // if we have already solved a similar problem, return the result from memory
     return dp[index][capacity];
   }
 };
 
+
+/**
+ Given two integer arrays to represent weights and profits of ‘N’ items, we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number ‘C’. Write a function that returns the maximum profit. Each item can only be selected once, which means either we put an item in the knapsack or skip it.
+ * 
+ */
+
+
+ 
 class KnapsackRec {
  public:
   int solveKnapsack(const vector<int> &profits, const vector<int> &weights,
@@ -186,8 +193,11 @@ class KnapsackRec {
   }
 };
 
+
+
+
 int main(int argc, char *argv[]) {
-  Knapsack ks;
+  KnapsackRec ks;
   vector<int> profits = {1, 6, 10, 16};
   vector<int> weights = {1, 2, 3, 5};
   // 22, 17

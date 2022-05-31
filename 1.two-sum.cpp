@@ -20,7 +20,7 @@ public:
           if(m.find(nums[i])==m.end()){
             m[target - nums[i]] = i;
           }else{
-            //   when we found second element, we return current index
+            // when we found second element, we return current index
               return {m[nums[i]], i};
           }
         }
