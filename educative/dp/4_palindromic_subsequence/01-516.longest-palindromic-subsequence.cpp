@@ -9,8 +9,7 @@ using namespace std;
 
 // @lc code=start
 class Solution {
-
-public:
+ public:
   int longestPalindromeSubseq(string s) {
     int n = s.size();
     vector<vector<int>> dp(n, vector<int>(n, 0));
@@ -38,7 +37,7 @@ public:
 class SolutionTopDown {
   vector<vector<int>> dp;
 
-public:
+ public:
   int longestPalindromeSubseq(string s) {
     int n = s.size();
     dp = vector<vector<int>>(n, vector<int>(n, -1));
@@ -70,7 +69,7 @@ public:
 
 // Time Limit Exceeded
 class SolutionRecursion {
-public:
+ public:
   int longestPalindromeSubseq(string s) {
     return longestPalindromeSubseqRecursive(s, 0, s.size() - 1);
   }
@@ -97,7 +96,7 @@ public:
 class SolutionRecursion2 {
   unordered_map<string, int> m;
 
-public:
+ public:
   int longestPalindromeSubseq(string s) {
     return longestPalindromeSubseqRecursive(s, 0, s.size() - 1);
   }
@@ -113,7 +112,6 @@ public:
     string key = getKey(l, r);
 
     if (!m.count(key)) {
-
       if (st[l] == st[r]) {
         m[key] = 2 + longestPalindromeSubseqRecursive(st, l + 1, r - 1);
       } else {
@@ -132,9 +130,7 @@ int main() {
   SolutionRecursion2 s;
 
   // 6
-  cout << s.longestPalindromeSubseq(
-              "fffggg")
-       << endl;
+  cout << s.longestPalindromeSubseq("fffggg") << endl;
   // 494
   // cout << s.longestPalindromeSubseq(
   //             "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"

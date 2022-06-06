@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// https://www.educative.io/courses/grokking-the-coding-interview/m25rBmwLV00
 class TopologicalSort {
  public:
   static vector<int> sort(int vertices, const vector<vector<int>>& edges) {
@@ -15,6 +16,7 @@ class TopologicalSort {
         inDegree;  // count of incoming edges for every vertex
     unordered_map<int, vector<int>> graph;  // adjacency list graph
 
+
     // 1)
     // for (int i = 0; i < vertices; i++) {
     //   inDegree[i] = 0;
@@ -23,7 +25,7 @@ class TopologicalSort {
 
     // 2)
     // source->destination
-    // init source instead of all the vertices
+    // init source vertex instead of all the vertices
     for (int i = 0; i < edges.size(); ++i) {
       inDegree[edges[i][0]] = 0;
     }

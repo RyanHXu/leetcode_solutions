@@ -79,12 +79,16 @@ class KnapsackButtonUp {
     for (int i = 1; i < n; ++i) {
       for (int j = 1; j < capacity + 1; ++j) {
         int p1 = 0, p2 = 0;
-        if (j >= weights[i]) p1 = profits[i] + dp[i - 1][j - weights[i]];
-        // exclude
+        if (j >= weights[i]) {
+          // include the current item
+          p1 = profits[i] + dp[i - 1][j - weights[i]];
+        }
+        // exclude the current item
         p2 = dp[i - 1][j];
         dp[i][j] = max(p1, p2);
       }
     }
+
     return dp[n - 1][capacity];
   }
 };
@@ -127,7 +131,7 @@ class KnapsackMap {
   }
 };
 
-class KnapsackVecMemory {
+class KnapsackTopDownVec {
   vector<vector<int>> dp;
 
  public:
@@ -156,19 +160,21 @@ class KnapsackVecMemory {
       dp[index][capacity] = max(p1, p2);
     }
 
-    // if we have already solved a similar problem, return the result from memory
+    // if we have already solved a similar problem, return the result from
+    // memory
     return dp[index][capacity];
   }
 };
 
-
 /**
- Given two integer arrays to represent weights and profits of ‘N’ items, we need to find a subset of these items which will give us maximum profit such that their cumulative weight is not more than a given number ‘C’. Write a function that returns the maximum profit. Each item can only be selected once, which means either we put an item in the knapsack or skip it.
- * 
+ Given two integer arrays to represent weights and profits of ‘N’ items, we need
+ to find a subset of these items which will give us maximum profit such that
+ their cumulative weight is not more than a given number ‘C’. Write a function
+ that returns the maximum profit. Each item can only be selected once, which
+ means either we put an item in the knapsack or skip it.
+ *
  */
 
-
- 
 class KnapsackRec {
  public:
   int solveKnapsack(const vector<int> &profits, const vector<int> &weights,
@@ -193,11 +199,33 @@ class KnapsackRec {
   }
 };
 
+class KnapsackRecTest {
+ public:
+  int solveKnapsack(const vector<int> &profits, const vector<int> &weights,
+                    int capacity) {
+    int n = profits.size();
+    vector<int> dp(capacity + 1, 0);
+    // first row
+    for (int i = 1; i < capacity; ++i) {
+      if (i >= weights[0]) {
+        dp[i] = profits[0];
+      }
+    }
 
+    for (int i = 1; i < n; ++i) {
+      for (int j = capacity; j >= 0; --j) {
+        if (j >= weights[i]) {
+          dp[j] = max(dp[j], profits[i] + dp[j - weights[i]]);
+        }
+      }
+    }
 
+    return dp[capacity];
+  }
+};
 
 int main(int argc, char *argv[]) {
-  KnapsackRec ks;
+  KnapsackRecTest ks;
   vector<int> profits = {1, 6, 10, 16};
   vector<int> weights = {1, 2, 3, 5};
   // 22, 17
