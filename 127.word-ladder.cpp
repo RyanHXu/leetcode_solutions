@@ -154,7 +154,7 @@ public:
   }
 };
 int main() {
-  Solution s;
+  SolutionBFS s;
   vector<string> wordList{"hot", "dot", "dog", "lot", "log", "cog"};
   cout << s.ladderLength("hit", "cog", wordList) << endl;
 

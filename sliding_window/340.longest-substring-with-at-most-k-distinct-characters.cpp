@@ -10,32 +10,41 @@ using namespace std;
 
 // @lc code=start
 class Solution {
-public:
+ public:
   int lengthOfLongestSubstringKDistinct(string s, int k) {
+    // case 1
     int n = s.length();
-    if (s.length() < k + 1) {
+    if (n <= k) {
       return n;
     }
 
+    // case 2
     int left = 0, right = 0;
     int res = 0;
+    // store right most position
     unordered_map<char, int> m;
-    while (right < n)
-    {
-        m[s[right]] = right;
-        ++right;
-        
-        if(m.size()==k+1){
-            int del_idx = INT32_MAX;
-            for (const auto& [key, freq] : m) {
-                del_idx = min(del_idx, freq);
-            }
-            m.erase(s[del_idx]);
-            left = del_idx + 1;
+    while (right < n) {
+      m[s[right++]] = right;
+      // ++right;
+
+      if (m.size() == k + 1) {
+        int leftmost_index = INT32_MAX;
+        for (const auto &[key, rightmost_index] : m) {
+          leftmost_index = min(leftmost_index, rightmost_index);
         }
-        res = max(res,right - left);
+        m.erase(s[leftmost_index]);
+        left = leftmost_index + 1;
+      }
+      res = max(res, right - left);
     }
     return res;
   }
 };
 // @lc code=end
+
+int main(int argc, char const *argv[]) {
+  string s1("eceba");
+  Solution s;
+  cout << s.lengthOfLongestSubstringKDistinct(s1, 2) << '\n';
+  return 0;
+}

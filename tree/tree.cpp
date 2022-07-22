@@ -265,7 +265,6 @@ public:
       s.pop_back();
 
       // cause this is stack, push right first, pop right later
-
       if (curr->right) {
         s.push_back(curr->right);
       }

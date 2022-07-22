@@ -18,6 +18,8 @@ struct TreeNode {
 };
 // @lc code=start
 
+// profit from a complete tree
+// TODO: analyze time complexity
 class Solution {
 public:
   int depth(TreeNode *root) {
@@ -38,4 +40,22 @@ public:
     }
   }
 };
+
+
 // @lc code=end
+
+
+
+
+
+// naive approach
+// time complexity: O(N)
+// space complexity: O(logN) 
+class Solution2 {
+ public:
+  int countNodes(TreeNode *root) {
+    if (!root) return 0;
+
+    return 1 + countNodes(root->left) + countNodes(root->right);
+  }
+};
