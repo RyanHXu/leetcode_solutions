@@ -11,7 +11,7 @@ class TaskScheduling {
     unordered_map<int, int> inDegree;
     unordered_map<int, vector<int>> graph;
 
-    // init source's degree
+    // init all non-sink node's degree
     for (const auto& val : prerequisites) {
       inDegree[val[0]] = 0;
     }
@@ -55,6 +55,7 @@ int main(int argc, char* argv[]) {
       3, vector<vector<int>>{vector<int>{0, 1}, vector<int>{1, 2}});
   cout << "Tasks execution possible: " << result << endl;
 
+  // The tasks have a cyclic dependency, therefore they cannot be scheduled
   result = TaskScheduling::isSchedulingPossible(
       3, vector<vector<int>>{vector<int>{0, 1}, vector<int>{1, 2},
                              vector<int>{2, 0}});

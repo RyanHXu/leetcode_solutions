@@ -7,29 +7,25 @@ class TaskSchedulingOrder {
   static vector<int> findOrder(int tasks,
                                const vector<vector<int>>& prerequisites) {
     vector<int> sortedOrder;
-
     unordered_map<int, int> inDegree;
     unordered_map<int, vector<int>> graph;
 
-    // init source's degree
+    // init all non-sink node's degree
     for (const auto& val : prerequisites) {
       inDegree[val[0]] = 0;
     }
 
-    // update degree,
     // build graph
     for (const auto& val : prerequisites) {
       int parent = val[0], child = val[1];
-      graph[parent].push_back(child);
+      graph[parent].push_back(child);  // put child into parent's list
       ++inDegree[child];
     }
 
-    // queue
+    // put source-nodes into queue
     queue<int> sources;
     for (const auto& val : inDegree) {
-      if (val.second == 0) {
-        sources.push(val.first);
-      }
+      if (val.second == 0) sources.push(val.first);
     }
 
     while (!sources.empty()) {
@@ -40,9 +36,7 @@ class TaskSchedulingOrder {
 
       for (const auto& child : children) {
         --inDegree[child];
-        if (inDegree[child] == 0) {
-          sources.push(child);
-        }
+        if (inDegree[child] == 0) sources.push(child);
       }
     }
 
@@ -55,16 +49,19 @@ class TaskSchedulingOrder {
 };
 
 int main(int argc, char* argv[]) {
-  vector<int> result = TaskSchedulingOrder::findOrder(
-      3, vector<vector<int>>{vector<int>{0, 1}, vector<int>{1, 2}});
+  vector<int> result;
+
+  // topological sort is not possible as the graph has a cycle
+  result = TaskSchedulingOrder::findOrder(
+      3, vector<vector<int>>{vector<int>{0, 1}, vector<int>{1, 2},
+                             vector<int>{2, 0}});
   for (auto num : result) {
     cout << num << " ";
   }
   cout << endl;
 
   result = TaskSchedulingOrder::findOrder(
-      3, vector<vector<int>>{vector<int>{0, 1}, vector<int>{1, 2},
-                             vector<int>{2, 0}});
+      3, vector<vector<int>>{vector<int>{0, 1}, vector<int>{1, 2}});
   for (auto num : result) {
     cout << num << " ";
   }
@@ -78,4 +75,12 @@ int main(int argc, char* argv[]) {
     cout << num << " ";
   }
   cout << endl;
+
+  /**
+   *
+
+   0 1 2
+   1 0 3 4 2 5
+   *
+   */
 }

@@ -26,10 +26,13 @@ public:
     neighbors = _neighbors;
   }
 };
-// @lc code=start
 
+// https://leetcode.com/problems/clone-graph/solution/
+
+
+// @lc code=start
 // dfs
-class Solution {
+class Solution2 {
 public:
   unordered_map<Node *, Node *> visited;
   Node *cloneGraph(Node *node) {
@@ -52,4 +55,8 @@ public:
     return cloneNode;
   }
 };
+
+
 // @lc code=end
+
+

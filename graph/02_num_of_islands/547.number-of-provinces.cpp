@@ -12,6 +12,9 @@ using namespace std;
 
 // @lc code=start
 // we can choose using visited table or not
+// https://zxi.mytechroad.com/blog/graph/leetcode-547-friend-circles/
+// Time complexity: O(n^2)
+// Space complexity: O(n)
 class Solution {
 public:
   int findCircleNum(vector<vector<int>> &isConnected) {

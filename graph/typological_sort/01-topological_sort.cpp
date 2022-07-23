@@ -3,6 +3,8 @@
 using namespace std;
 
 // https://www.educative.io/courses/grokking-the-coding-interview/m25rBmwLV00
+// time complexity: O(V+E)
+// space complexity: O(V+E), V is vertex, e is edges
 class TopologicalSort {
  public:
   static vector<int> sort(int vertices, const vector<vector<int>>& edges) {
@@ -15,7 +17,7 @@ class TopologicalSort {
     unordered_map<int, int>
         inDegree;  // count of incoming edges for every vertex
     unordered_map<int, vector<int>> graph;  // adjacency list graph
-
+    // graph contains all the nodes but sink node
 
     // 1)
     // for (int i = 0; i < vertices; i++) {
@@ -25,7 +27,7 @@ class TopologicalSort {
 
     // 2)
     // source->destination
-    // init source vertex instead of all the vertices
+    // init all non-sink node's degree
     for (int i = 0; i < edges.size(); ++i) {
       inDegree[edges[i][0]] = 0;
     }
@@ -72,9 +74,13 @@ class TopologicalSort {
 };
 
 int main(int argc, char* argv[]) {
-  vector<int> result = TopologicalSort::sort(
-      4, vector<vector<int>>{vector<int>{1, 2}, vector<int>{2, 3},
-                             vector<int>{3, 4}, vector<int>{4, 1}});
+  vector<int> result;
+
+  result = TopologicalSort::sort(
+      7, vector<vector<int>>{vector<int>{6, 4}, vector<int>{6, 2},
+                             vector<int>{5, 3}, vector<int>{5, 4},
+                             vector<int>{3, 0}, vector<int>{3, 1},
+                             vector<int>{3, 2}, vector<int>{4, 1}});
   for (auto num : result) {
     cout << num << " ";
   }
@@ -90,10 +96,8 @@ int main(int argc, char* argv[]) {
   cout << endl;
 
   result = TopologicalSort::sort(
-      7, vector<vector<int>>{vector<int>{6, 4}, vector<int>{6, 2},
-                             vector<int>{5, 3}, vector<int>{5, 4},
-                             vector<int>{3, 0}, vector<int>{3, 1},
-                             vector<int>{3, 2}, vector<int>{4, 1}});
+      4, vector<vector<int>>{vector<int>{1, 2}, vector<int>{2, 3},
+                             vector<int>{3, 4}, vector<int>{4, 1}});
   for (auto num : result) {
     cout << num << " ";
   }
@@ -108,9 +112,10 @@ int main(int argc, char* argv[]) {
   cout << endl;
 
   /**
-    3 2 0 1
-    4 2 3 0 1
-    6 5 3 4 0 2 1
+    5 6 3 4 0 2 1 
+    4 2 3 0 1 
+
+    
    *
    */
 }

@@ -7,6 +7,7 @@
 # @lc code=start
 from collections import deque
 import queue
+from typing import List
 
 
 # bfs
@@ -46,3 +47,7 @@ class Solution:
 
 
 # @lc code=end
+
+
+s = Solution()
+print(s.maxDistance([[1,0,1],[1,0,0],[0,0,1]]))

@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode id=207 lang=cpp
+ * @lc app=leetcode id=1162 lang=cpp
  *
- * [207] Course Schedule
+ * [1162] As Far from Land as Possible
  */
 
 #include "bits/stdc++.h"
@@ -11,7 +11,7 @@ using namespace std;
 // @lc code=start
 class Solution {
 public:
-    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+    int maxDistance(vector<vector<int>>& grid) {
         
     }
 };
